@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Carrosel de Carros</title>
+  <style>
+    #carrosel {
+      width: 600px;
+      height: 400px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    #carrosel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    #descricao-carro {
+      width: 600px;
+      height: 200px;
+      margin: 20px auto;
+      background-color: #f2f2f2;
+      padding: 20px;
+      display: none;
+    }
+    
+    #descricao-carro h3 {
+      margin-top: 0;
+    }
+
+    .botoes {
+      text-align: center;
+    }
+    
+    .botoes button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="carrosel">
+    <img src="url_da_imagem_1" alt="Carro 1">
+    <img src="url_da_imagem_2" alt="Carro 2">
+    <img src="url_da_imagem_3" alt="Carro 3">
+    <!-- Adicione mais imagens aqui -->
+  </div>
+
+  <div class="botoes">
+    <button id="anterior">Anterior</button>
+    <button id="proximo">Próximo</button>
+  </div>
+
+  <div id="descricao-carro">
+    <h3>Informações do Carro</h3>
+    <p>Descrição, especificações e detalhes sobre o carro selecionado.</p>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var carrosel = document.getElementById('carrosel');
+      var imagens = carrosel.getElementsByTagName('img');
+      var descricaoCarro = document.getElementById('descricao-carro');
+      var botaoAnterior = document.getElementById('anterior');
+      var botaoProximo = document.getElementById('proximo');
+
+      var indiceAtual = 0;
+      var intervalo = setInterval(mostrarProximoCarro, 3000); // Altere o tempo aqui (em milissegundos)
+
+      carrosel.addEventListener('click', function () {
+        mostrarDescricaoCarro(indiceAtual);
+      });
+
+      botaoAnterior.addEventListener('click', function () {
+        mostrarCarroAnterior();
+      });
+
+      botaoProximo.addEventListener('click', function () {
+        mostrarProximoCarro();
+      });
+
+      function mostrarProximoCarro() {
+        imagens[indiceAtual].style.display = 'none';
+        indiceAtual = (indiceAtual + 1) % imagens.length;
+        imagens[indiceAtual].style.display = 'block';
+      }
+
+      function mostrarCarroAnterior() {
+        imagens[indiceAtual].style.display = 'none';
+        indiceAtual = (indiceAtual - 1 + imagens.length) % imagens.length;
+        imagens[indiceAtual].style.display = 'block';
+      }
+
+      function mostrarDescricaoCarro(indice) {
+        var descricao = 'Aqui estão as informações do Carro ' + (indice + 1) + '.';
+        // Adicione mais informações específicas do carro, dependendo do seu contexto.
+       
